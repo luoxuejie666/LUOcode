@@ -1,0 +1,27 @@
+const int N=1e8;
+int primes[N],cnt;  //  存放质数
+bool st[N];  //  当前数是否被筛
+ 
+int minp[N];  //  保存最小质因子
+ 
+int get_primes(int n)  //  欧拉筛  O(n)
+{
+    for(int i=2;i<=n;i++)
+    {
+        if(!st[i])  //  若i没被筛去  此时i必为质数
+        {
+            minp[i]=i;  //  i的最小的质因子为i
+            primes[cnt++]=i;  //  将i保存在primes数组中  cnt往后移动一位
+        }
+        for(int j=0;i*primes[j]<=n;j++)
+        {
+            int t=primes[j]*i;  //  得到质数的倍数
+            st[t] = true;  //  质数的倍数被筛去
+            minp[t]=primes[j];  //  质数的倍数最小的质因子就是该质数
+            if(i%primes[j]==0) break;  
+            //  若i是之前素数的倍数  
+            //  说明这个倍数会在后面的循环内被筛去  
+            //  没有必要继续循环了
+        }
+    }
+}
