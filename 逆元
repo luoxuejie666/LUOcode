@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+ll mod = 998244353;
+int exgcd(int a, int b, int &x, int &y)
+{
+    if (b == 0)
+    {
+        x = 1, y = 0;
+        return a;
+    }
+    int d = exgcd(b, a % b, y, x);
+    y -= a / b * x;
+    return d;
+}
+
+int main()
+{
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    ll a, b;
+    cin >> a >> b;
+    int x=1, y=0, d;
+    d = exgcd(a+b, mod, x, y);
+    cout<<(a%mod*x%mod+mod)%mod<<' '<<(b%mod*x%mod+mod)%mod<<'\n';
+}
