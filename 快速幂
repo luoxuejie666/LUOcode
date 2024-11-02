@@ -10,7 +10,7 @@ ll fast_pow(ll a, ll b)
             ans = (ans * a) % mod;
         }
         a = (a * a) % mod;
-        b >> 1;
+        b >>= 1;
     }
     return ans;
 }
