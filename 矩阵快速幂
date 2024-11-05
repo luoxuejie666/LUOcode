@@ -1,1 +1,28 @@
-
+vector<vector<long long>> chen(const vector<vector<long long>> &A,
+                               const vector<vector<long long>> &B) {
+    ll n = A.size();
+    vector<vector<long long>> C(n, vector<long long>(n, 0));
+    for (int k = 0; k < n; k++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                C[i][j] =(C[i][j]+ A[i][k] * B[k][j]) % MOd;
+            }
+        }
+    }
+    return C;
+}
+vector<vector<long long>> matixpow(vector<vector<long long>> A, long long p) {
+    ll n = A.size();
+    vector<vector<long long>> result(n, vector<long long>(n, 0));
+    for (int i = 0; i < n; i++) {
+        result[i][i] = 1;
+    }
+    while (p) {
+        if (p & 1) {
+            result = chen(result, A);
+        }
+        A = chen(A, A);
+        p >>= 1;
+    }
+    return result;
+}
