@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll t, n, s;
+ll mod = 1000;
+string str;
+ll a, b;
+struct abc
+{
+    string name;
+    ll v;
+    ll vm;
+};
+// bool compare1(const abc &a, const abc &b) {
+//     return a.name > b.name;
+// }
+bool compare(const abc &a, const abc &b)
+{
+    if (a.v == b.v)
+    {
+        if (a.vm == b.vm && a.v == b.v)
+        {
+            return a.name < b.name;
+        }
+        return a.vm > b.vm;
+    }
+    return a.v > b.v;
+}
+int main()
+{
+    cin >> t;
+    while (t--)
+    {
+        cin >> n >> s;
+        ll flag;
+        vector<abc> chedui(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> chedui[i].name >> chedui[i].v >> chedui[i].vm;
+        }
+        sort(chedui.begin(), chedui.end(), compare);
+        // for (const auto &item : chedui)
+        // {
+        //     cout << item.name << " " << item.v << " " << item.vm << endl;
+        // }
+        if (chedui[1].v == chedui[0].v && chedui[1].vm == chedui[0].vm)
+        {
+            cout << "NO" << '\n';
+            for (int i = 0; i < n; i++)
+            {
+                if (chedui[i].v == chedui[0].v && chedui[i].vm == chedui[0].vm)
+                {
+                    cout << chedui[i].name << '\n';
+                }
+            }
+        }
+        else
+        {
+            cout << "YES" << '\n';
+            cout << chedui[0].name << '\n';
+        }
+        cout << '\n';
+    }
+}
